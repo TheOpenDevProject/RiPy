@@ -1,13 +1,26 @@
 from RiPy.BasicProfile import BasicProfileAPI
 from RiPy.Ranked import RankedProfileAPI
-profile = BasicProfileAPI("16e553c8-70cf-44cf-95b4-81c6c2269bee","oce")
-rankedStats = RankedProfileAPI("16e553c8-70cf-44cf-95b4-81c6c2269bee","oce")
+from RiPy.MatchAndStats import MatchAndStats
 
-profile.requestSummonerProfile("KeepCalmGainLP")
+apiKey = "APIKey"
+region = {0: "br",
+          1: "eune",
+          2: "euw",
+          3: "kr",
+          4: "las",
+          5: "lan",
+          6: "na",
+          7: "oce",
+          8: "tr",
+          9: "ru",
+          10: "global"
+        }
 
-rankedStats.getRankedProfile(str(profile.getSummonerID()))
-print("Summoner:" + profile.getSummonerName())
-print(rankedStats.getRankedTier())
-print(rankedStats.getDivision())
+profile = BasicProfileAPI(apiKey, region[7])
+rankedStats = RankedProfileAPI(apiKey, region[7])
+MatchHistory = MatchAndStats(apiKey, region[7])
 
-
+profile.requestSummonerProfile("SumCoolAid")
+MatchHistory.requestMatchHistory(str(profile.getSummonerID()))
+print(MatchHistory.getAverageGoldBeforeTen())
+print(MatchHistory.getAverageGoldFromTenToTwenty())
