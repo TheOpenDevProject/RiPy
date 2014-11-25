@@ -10,11 +10,11 @@ class BasicProfileAPI:
                    500: "(500)Riot API - Internal Server Error (AKA Riot swung a wrecking ball into the API server)",
                    503: "(503)Riot API - Service Unavailable"
                     }
-    _summonerID = None
-    _summonerName = None
-    _summonerProfileIconId = None
-    _summonerLevel = None
-    _summonerRevisionDate = None
+    summonerID = None
+    summonerName = None
+    summonerProfileIconId = None
+    summonerLevel = None
+    summonerRevisionDate = None
     #Settings#
     apiKey = None
     region = None
@@ -40,15 +40,19 @@ class BasicProfileAPI:
 
         #Begin JSON Processing#
         jsonDocument = json.loads(endPointData)
-        summonerInfo = jsonDocument[self.summonerName]
+        summonerInfo = jsonDocument[summonerName.lower()]
 
         self.summonerID = summonerInfo['id']
+        self.summonerName = summonerInfo['name']
+        self.summonerLevel = summonerInfo['summonerLevel']
+        self.summonerProfileIconId = summonerInfo['profileIconId']
+        self.summonerRevisionDate = summonerInfo['revisionDate']
 
     def getSummonerName(self):
         return self._summonerName
 
     def getSummonerID(self):
-        return self._summonerID
+        return self.summonerID
 
     def getSummonerLevel(self):
         return self._summonerLevel
