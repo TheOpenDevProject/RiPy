@@ -41,7 +41,7 @@ class BasicProfileAPI:
 
         #Begin JSON Processing#
         jsonDocument = json.loads(endPointData)
-        summonerInfo = jsonDocument[summonerName.lower()]
+        summonerInfo = jsonDocument[summonerName.replace(" ","").lower()]
 
         self.summonerID = summonerInfo['id']
         self.summonerName = summonerInfo['name']

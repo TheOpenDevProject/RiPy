@@ -2,7 +2,7 @@ from RiPy.BasicProfile import BasicProfileAPI
 
 profile = BasicProfileAPI("APIKey","oce")
 
-profile.requestSummonerProfile("SumCoolAid")
+profile.requestSummonerProfile("SummonerName")
 
 print("Summoner ID:" + str(profile.getSummonerID()))
 print("Summoner Level:" + str(profile.getSummonerLevel()))
