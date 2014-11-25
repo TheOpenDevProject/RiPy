@@ -1,6 +1,8 @@
 __author__ = 'TheOpenDevProject'
 
 class APIInternalsCore:
+        apiKey = None
+        region = None
         APIResponse = {400: "(400)Riot API - Bad Request",
                    401: "(401)Riot API - Unauthorized (Your API key was invalid or you tried to access an invalid URL)",
                    404: "(404)Riot API - Not Found",

@@ -4,8 +4,7 @@ import urllib2
 import json
 
 class RankedProfileAPI(APIInternalsCore):
-    apiKey = None
-    region = None
+
     #Solo5x5 Ranked Members#
     leagueName = None
     leaguePoints = None

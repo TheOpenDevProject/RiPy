@@ -10,9 +10,6 @@ class BasicProfileAPI(APIInternalsCore):
     summonerProfileIconId = None
     summonerLevel = None
     summonerRevisionDate = None
-    # Settings#
-    apiKey = None
-    region = None
 
     def __init__(self, apiKeyInit, regionInit):
         self.apiKey = apiKeyInit
