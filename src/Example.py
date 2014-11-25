@@ -4,5 +4,6 @@ profile = BasicProfileAPI("APIKey","oce")
 
 profile.requestSummonerProfile("SumCoolAid")
 
-print(profile.summonerID)
-
+print("Summoner ID:" + str(profile.getSummonerID()))
+print("Summoner Level:" + str(profile.getSummonerLevel()))
+print("Summoner Icon ID:" + str(profile.getSummonerProfileIconID()))

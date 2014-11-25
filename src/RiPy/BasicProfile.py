@@ -24,7 +24,8 @@ class BasicProfileAPI:
 
     def requestSummonerProfile(self,summonerName):
         #Set the Data Endpoint#
-        EndPoint = "https://" + self.region + ".api.pvp.net/api/lol/" + self.region + "/v1.4/summoner/by-name/" + summonerName + "?api_key=" + self.apiKey
+
+        EndPoint = "https://" + self.region + ".api.pvp.net/api/lol/" + self.region + "/v1.4/summoner/by-name/" + summonerName.replace(" ", "") + "?api_key=" + self.apiKey
         print ("Contacting Endpoint " + EndPoint)
         #Make Request To API / Store the response for processing#
         try:
@@ -49,16 +50,16 @@ class BasicProfileAPI:
         self.summonerRevisionDate = summonerInfo['revisionDate']
 
     def getSummonerName(self):
-        return self._summonerName
+        return self.summonerName
 
     def getSummonerID(self):
         return self.summonerID
 
     def getSummonerLevel(self):
-        return self._summonerLevel
+        return self.summonerLevel
 
     def getSummonerProfileIconID(self):
-        return self._summonerProfileIconId
+        return self.summonerProfileIconId
 
     def getSummonerProfileRevisionDate(self):
-        return self._summonerRevisionDate
+        return self.summonerRevisionDate
