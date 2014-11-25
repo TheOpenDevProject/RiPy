@@ -1,31 +1,28 @@
 __author__ = 'TheOpenDevProject'
 import urllib2
 import json
+from APIInternals import APIInternalsCore
 
-class BasicProfileAPI:
-    APIResponse = {400: "(400)Riot API - Bad Request",
-                   401: "(401)Riot API - Unauthorized (Your API key was invalid or you tried to access an invalid URL)",
-                   404: "(404)Riot API - Not Found",
-                   429: "(429)Riot API - Rate Limit Exceeded",
-                   500: "(500)Riot API - Internal Server Error (AKA Riot swung a wrecking ball into the API server)",
-                   503: "(503)Riot API - Service Unavailable"
-                    }
+
+class BasicProfileAPI(APIInternalsCore):
     summonerID = None
     summonerName = None
     summonerProfileIconId = None
     summonerLevel = None
     summonerRevisionDate = None
-    #Settings#
+    # Settings#
     apiKey = None
     region = None
-    def __init__(self,apiKeyInit,regionInit):
+
+    def __init__(self, apiKeyInit, regionInit):
         self.apiKey = apiKeyInit
         self.region = regionInit
 
-    def requestSummonerProfile(self,summonerName):
+    def requestSummonerProfile(self, summonerName):
         #Set the Data Endpoint#
 
-        EndPoint = "https://" + self.region + ".api.pvp.net/api/lol/" + self.region + "/v1.4/summoner/by-name/" + summonerName.replace(" ", "") + "?api_key=" + self.apiKey
+        EndPoint = "https://" + self.region + ".api.pvp.net/api/lol/" + self.region + "/v1.4/summoner/by-name/" + summonerName.replace(
+            " ", "") + "?api_key=" + self.apiKey
         print ("Contacting Endpoint " + EndPoint)
         #Make Request To API / Store the response for processing#
         try:
@@ -41,7 +38,7 @@ class BasicProfileAPI:
 
         #Begin JSON Processing#
         jsonDocument = json.loads(endPointData)
-        summonerInfo = jsonDocument[summonerName.replace(" ","").lower()]
+        summonerInfo = jsonDocument[summonerName.replace(" ", "").lower()]
 
         self.summonerID = summonerInfo['id']
         self.summonerName = summonerInfo['name']
@@ -63,3 +60,13 @@ class BasicProfileAPI:
 
     def getSummonerProfileRevisionDate(self):
         return self.summonerRevisionDate
+
+    def getAsArray(self):
+        #This will return the summoners basic profile as an ASSOCARRAY#
+        summonerProfileArray = {"summonerId": self.summonerID,
+                                "summonerName": self.summonerName,
+                                "summonerLevel": self.summonerLevel,
+                                "summonerProfileIconId": self.summonerProfileIconId,
+                                "summonerRevisionDate": self.summonerRevisionDate
+        }
+        return summonerProfileArray

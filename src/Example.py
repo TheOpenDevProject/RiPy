@@ -1,9 +1,13 @@
 from RiPy.BasicProfile import BasicProfileAPI
-
+from RiPy.Ranked import RankedProfileAPI
 profile = BasicProfileAPI("APIKey","oce")
+rankedStats = RankedProfileAPI("APIKey","oce")
 
-profile.requestSummonerProfile("SummonerName")
+profile.requestSummonerProfile("SumCoolAid")
 
-print("Summoner ID:" + str(profile.getSummonerID()))
-print("Summoner Level:" + str(profile.getSummonerLevel()))
-print("Summoner Icon ID:" + str(profile.getSummonerProfileIconID()))
+rankedStats.getRankedProfile(str(profile.getSummonerID()))
+print("Summoner:" + profile.getSummonerName())
+print(rankedStats.getRankedTier())
+print(rankedStats.getDivision())
+
+
