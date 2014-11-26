@@ -4,13 +4,13 @@ import json
 from APIInternals import APIInternalsCore
 class MatchAndStats(APIInternalsCore):
     matchHistory = {}
-
-    def __init__(self,apiKey,region):
+    sampleSize = 10
+    def __init__(self,apiKey,region,sampleSize):
         self.apiKey = apiKey
         self.region = region
-
+        self.sampleSize = sampleSize
     def requestMatchHistory(self,summonerID):
-        endPoint = "https://" + self.region + ".api.pvp.net/api/lol/" + self.region + "/v2.2/matchhistory/"+ summonerID +"?api_key=" + self.apiKey
+        endPoint = "https://" + self.region + ".api.pvp.net/api/lol/" + self.region + "/v2.2/matchhistory/"+ summonerID +"?beginIndex=0&endIndex="+ str(self.sampleSize) +"&api_key=" + self.apiKey
         print("Contacting EndPoint:" + endPoint)
 
         try:
@@ -31,6 +31,7 @@ class MatchAndStats(APIInternalsCore):
 
     def getAverageGoldBeforeTen(self):
         nGames = len(self.matchHistory)
+        print("Sample Size: " + str(nGames))
         goldTotal = 0
         goldAverage = 0
         for i in range(0,nGames):
@@ -40,13 +41,26 @@ class MatchAndStats(APIInternalsCore):
 
         return goldAverage
 
-    #def getAverageGoldFromTenToTwenty(self):
-     #   nGames = len(self.matchHistory)
-      #  goldTotal = 0
-       # goldAverage = 0
-        #for i in range(0,nGames):
-         #   if "tenToTwenty" in self.matchHistory[i][0]["timeline"]["goldPerMinDeltas"]:
-          #      goldTotal += self.matchHistory[i][0]["timeline"]["goldPerMinDeltas"]["tenToTwenty"]
-           # else:
-            #    print("Gold Per Min For Game(" + str(i) + ") Is Missing")
+    def getAverageDamageTaken(self):
+        nGames = len(self.matchHistory)
+        print("Sample Size: " + str(nGames))
+        totalDamage = 0
+        averageDamage = 0
+        for i in range (0,nGames):
+            print()
+            totalDamage += self.matchHistory[i]["participants"][0]["stats"]["totalDamageTaken"]
 
+        averageDamage = totalDamage / nGames
+
+        return averageDamage
+
+    def getAveragePentaKills(self):
+        nGames = len(self.matchHistory)
+        print("Sample Size: " + str(nGames))
+        totalPentaKills = 0
+        averagePentaKills = 0
+        for i in range (0,nGames):
+            totalPentaKills += self.matchHistory[i]["participants"][0]["stats"]["pentaKills"]
+        averagePentaKills = totalPentaKills / nGames
+
+        return averagePentaKills

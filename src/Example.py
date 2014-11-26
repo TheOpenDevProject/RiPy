@@ -18,9 +18,8 @@ region = {0: "br",
 
 profile = BasicProfileAPI(apiKey, region[7])
 rankedStats = RankedProfileAPI(apiKey, region[7])
-MatchHistory = MatchAndStats(apiKey, region[7])
+MatchHistory = MatchAndStats(apiKey, region[7],15)
 
 profile.requestSummonerProfile("SumCoolAid")
 MatchHistory.requestMatchHistory(str(profile.getSummonerID()))
-print(MatchHistory.getAverageGoldBeforeTen())
-print(MatchHistory.getAverageGoldFromTenToTwenty())
+print(str("Average Damage Taken: "+ str(MatchHistory.getAverageDamageTaken())))
