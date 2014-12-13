@@ -2,7 +2,7 @@ from RiPy.BasicProfile import BasicProfileAPI
 from RiPy.Ranked import RankedProfileAPI
 from RiPy.MatchAndStats import MatchAndStats
 
-apiKey = "APIKey"
+apiKey = ""
 region = {0: "br",
           1: "eune",
           2: "euw",
@@ -20,6 +20,8 @@ profile = BasicProfileAPI(apiKey, region[7])
 rankedStats = RankedProfileAPI(apiKey, region[7])
 MatchHistory = MatchAndStats(apiKey, region[7],15)
 
-profile.requestSummonerProfile("SumCoolAid")
+profile.requestSummonerProfile("tryn down forwat")
+rankedStats.getRankedProfile(str(profile.getSummonerID()))
+
 MatchHistory.requestMatchHistory(str(profile.getSummonerID()))
 print(str("Average Damage Taken: "+ str(MatchHistory.getAverageDamageTaken())))

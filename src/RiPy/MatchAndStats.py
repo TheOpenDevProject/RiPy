@@ -64,3 +64,21 @@ class MatchAndStats(APIInternalsCore):
         averagePentaKills = totalPentaKills / nGames
 
         return averagePentaKills
+
+    def getAverageAssists(self):
+        nGames = len(self.matchHistory)
+        assistTotal = 0
+        assistAverage = 0
+        for i in range(0,nGames):
+            assistTotal += self.matchHistory[i]["participants"][0]["stats"]["assists"]
+        assistAverage = assistTotal / nGames
+        return assistAverage
+
+    def getAverageMagicDamageDone(self):
+        nGames = len(self.matchHistory)
+        totalMagicDamage = 0
+        averageMagicDamage = 0
+        for i in range(0, nGames):
+            totalMagicDamage += self.matchHistory[i]["participants"][0]["stats"]["magicDamageDealt"]
+        averageMagicDamage = totalMagicDamage / nGames
+        return averageMagicDamage
